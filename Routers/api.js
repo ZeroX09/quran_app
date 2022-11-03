@@ -11,25 +11,22 @@ if(err){
         res.json(files.map(item=>{
             return{
                 filename:item.split('.')[0],
-                source:`${process.env.PUBLIC_URL||"https://172.20.10.3:5000"}/q/${item}`
+                source:`${process.env.PUBLIC_URL||"http://172.20.10.3:5000"}/q/${item}`
             }
            }));
     })
 
 
 });
+let path = require('path');
 
-Router.use((req,res,next)=>{
-    if(req.path==="/"){
+
+Router.get("*",(req,res,next)=>{
         res.sendFile(path.join(__dirname,'..','/public/index.html'))
-        
-    }else{
-        next()
-    };
-
 })
 
-let path = require('path');
+
+
 
 
 
